@@ -20,8 +20,9 @@
       crossorigin="anonymous"
     ></script>
     <script src="moment.js"></script>
-    <script src="countdown.min.js"></script>
-    <script src="moment-countdown.min.js"></script>
+    <!-- <script src="countdown.min.js"></script> -->
+    <!-- <script src="moment-countdown.min.js"></script> -->
+    <!-- <script src="index.js"></script> -->
     <title>Winter 2021 Course Hub</title>
     <link rel="icon" href="snowflake.svg" />
   </head>
@@ -530,16 +531,44 @@
         (function () {
           let dueDate = document.getElementsByClassName('due-date');
           let timeLeft = document.getElementsByClassName('time-left');
-          for (let i = 0; i < dueDate.length; i++) {
-            let m = moment(dueDate[i].textContent, 'LLLL');
-            let left = moment(m).countdown().toString();
-            timeLeft[i].textContent = left;
-          }
 
-          // TODO: update DOM to show clock ticking down
-          setTimeout(function () {
-            for (let i = 0; i < timeLeft.length; i++) {
-              // implement code here
+          let counter = setInterval(function () {
+            for (let i = 0; i < dueDate.length; i++) {
+              let m = moment(dueDate[i].textContent, 'LLLL');
+              let countDownDate = Date.parse(m._d);
+              let now = new Date().getTime();
+              let distance = countDownDate - now;
+              let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+              let hours = Math.floor(
+                (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+              );
+              let minutes = Math.floor(
+                (distance % (1000 * 60 * 60)) / (1000 * 60)
+              );
+              let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+              if (
+                !isNaN(days) &&
+                !isNaN(hours) &&
+                !isNaN(minutes && !isNaN(seconds))
+              ) {
+                let left =
+                  days +
+                  ' days ' +
+                  hours +
+                  ' hours ' +
+                  minutes +
+                  ' minutes ' +
+                  seconds +
+                  ' seconds';
+                timeLeft[i].textContent = left;
+              }
+
+              if (distance < 0) {
+                clearInterval(counter);
+                timeLeft[i].textContent = 'PAST DUE';
+                timeLeft[i].classList.add('text-danger');
+              }
             }
           }, 1000);
         })();
