@@ -33,6 +33,7 @@
         Currently on: <strong>Week 3</strong>
       </h1>
 
+      <!-- -------------- Nav -------------- -->
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <button
           class="navbar-toggler"
@@ -77,6 +78,7 @@
         </div>
       </nav>
 
+      <!-- -------------- Course links -------------- -->
       <section id="course-links" class="mb-4">
         <h2>Course Links:</h2>
         <ul class="list-group mb-4">
@@ -528,6 +530,7 @@
       </div>
     </div>
 
+    <!-- -------------- Script -------------- -->
     <script type="text/javascript">
       (function () {
         let dueDate = document.getElementsByClassName('due-date');
@@ -551,7 +554,8 @@
             if (
               !isNaN(days) &&
               !isNaN(hours) &&
-              !isNaN(minutes && !isNaN(seconds))
+              !isNaN(minutes) &&
+              !isNaN(seconds)
             ) {
               let left =
                 days +
