@@ -526,53 +526,58 @@
           >www.flaticon.com</a
         >
       </div>
-
-      <script type="text/javascript">
-        (function () {
-          let dueDate = document.getElementsByClassName('due-date');
-          let timeLeft = document.getElementsByClassName('time-left');
-
-          let counter = setInterval(function () {
-            for (let i = 0; i < dueDate.length; i++) {
-              let m = moment(dueDate[i].textContent, 'LLLL');
-              let countDownDate = Date.parse(m._d);
-              let now = new Date().getTime();
-              let distance = countDownDate - now;
-              let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-              let hours = Math.floor(
-                (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-              );
-              let minutes = Math.floor(
-                (distance % (1000 * 60 * 60)) / (1000 * 60)
-              );
-              let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-              if (
-                !isNaN(days) &&
-                !isNaN(hours) &&
-                !isNaN(minutes && !isNaN(seconds))
-              ) {
-                let left =
-                  days +
-                  ' days ' +
-                  hours +
-                  ' hours ' +
-                  minutes +
-                  ' minutes ' +
-                  seconds +
-                  ' seconds';
-                timeLeft[i].textContent = left;
-              }
-
-              if (distance < 0) {
-                clearInterval(counter);
-                timeLeft[i].textContent = 'PAST DUE';
-                timeLeft[i].classList.add('text-danger');
-              }
-            }
-          }, 1000);
-        })();
-      </script>
     </div>
+
+    <script type="text/javascript">
+      (function () {
+        let dueDate = document.getElementsByClassName('due-date');
+        let timeLeft = document.getElementsByClassName('time-left');
+
+        let counter = setInterval(function () {
+          for (let i = 0; i < dueDate.length; i++) {
+            let m = moment(dueDate[i].textContent, 'LLLL');
+            let countDownDate = Date.parse(m._d);
+            let now = new Date().getTime();
+            let distance = countDownDate - now;
+            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            let hours = Math.floor(
+              (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+            );
+            let minutes = Math.floor(
+              (distance % (1000 * 60 * 60)) / (1000 * 60)
+            );
+            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            if (
+              !isNaN(days) &&
+              !isNaN(hours) &&
+              !isNaN(minutes && !isNaN(seconds))
+            ) {
+              let left =
+                days +
+                ' days ' +
+                hours +
+                ' hours ' +
+                minutes +
+                ' minutes ' +
+                seconds +
+                ' seconds';
+              timeLeft[i].textContent = left;
+              timeLeft[i].classList.add('text-success');
+            }
+            if (days <= 2){
+              timeLeft[i].classList.remove('text-success');
+              timeLeft[i].classList.add('text-primary');
+            }
+            if (distance < 0) {
+              clearInterval(counter);
+              timeLeft[i].textContent = 'PAST DUE';
+              timeLeft[i].classList.remove('text-warning');
+              timeLeft[i].classList.add('text-danger');
+            }
+          }
+        }, 1000);
+      })();
+    </script>
   </body>
 </html>
