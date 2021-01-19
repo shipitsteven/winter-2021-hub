@@ -507,7 +507,7 @@
                 </td>
                 <td class="due-date">Wednesday, January 20 2021 11:59pm</td>
                 <td>100</td>
-                <td class="time-left">placeholder</td>
+                <td class="time-left"></td>
               </tr>
             </tbody>
           </table>
@@ -565,9 +565,12 @@
               timeLeft[i].textContent = left;
               timeLeft[i].classList.add('text-success');
             }
-            if (days <= 2){
+            if (days <= 2 && days >= 1){
               timeLeft[i].classList.remove('text-success');
-              timeLeft[i].classList.add('text-primary');
+              timeLeft[i].classList.add('text-info');
+            } else if (days < 1){
+              timeLeft[i].classList.remove('text-info');
+              timeLeft[i].classList.add('text-warning');
             }
             if (distance < 0) {
               clearInterval(counter);
