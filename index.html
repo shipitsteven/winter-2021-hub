@@ -571,11 +571,15 @@
             } else if (days < 1){
               timeLeft[i].classList.remove('text-info');
               timeLeft[i].classList.add('text-warning');
+              timeLeft[i].classList.add('bg-light');
+              timeLeft[i].classList.add('font-weight-bold');
             }
             if (distance < 0) {
               clearInterval(counter);
               timeLeft[i].textContent = 'PAST DUE';
               timeLeft[i].classList.remove('text-warning');
+              timeLeft[i].classList.remove('bg-light');
+              timeLeft[i].classList.remove('font-weight-bold');
               timeLeft[i].classList.add('text-danger');
             }
           }
